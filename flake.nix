@@ -29,6 +29,33 @@
     in
     {
       nixosConfigurations = {
+
+        sgp-arm-mysql = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./hosts/incus/sgp-arm-mysql
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aaron = import ./home;
+            }
+          ];
+        };
+
+        sgp-arm-redis = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./hosts/incus/sgp-arm-redis
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aaron = import ./home;
+            }
+          ];
+        };
+
         hkg-alibaba = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
